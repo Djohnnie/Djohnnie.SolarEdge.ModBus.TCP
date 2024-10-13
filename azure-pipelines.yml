@@ -18,8 +18,8 @@ steps:
   inputs:
     command: 'pack'
     packagesToPack: '**/Djohnnie.SolarEdge.ModBus.TCP.csproj'
-    versioningScheme: 'off'
     verbosityPack: 'Detailed'
+    versioningScheme: 'byBuildNumber'
 
 - task: NuGetCommand@2
   inputs:
