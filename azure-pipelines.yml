@@ -13,6 +13,13 @@ steps:
     command: 'build'
     projects: '**/Djohnnie.SolarEdge.ModBus.TCP.csproj'
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'pack'
+    packagesToPack: '**/Djohnnie.SolarEdge.ModBus.TCP.csproj'
+    versioningScheme: 'off'
+    verbosityPack: 'Detailed'
+
 - task: NuGetCommand@2
   inputs:
     command: 'push'
