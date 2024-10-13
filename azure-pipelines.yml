@@ -12,6 +12,7 @@ steps:
   inputs:
     command: 'build'
     projects: '**/Djohnnie.SolarEdge.ModBus.TCP.csproj'
+    arguments: '--configuration $(buildConfiguration)'
 
 - task: DotNetCoreCLI@2
   inputs:
