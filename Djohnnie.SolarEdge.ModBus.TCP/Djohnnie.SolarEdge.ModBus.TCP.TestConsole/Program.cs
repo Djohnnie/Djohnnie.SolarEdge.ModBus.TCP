@@ -10,7 +10,7 @@ using UInt64 = Djohnnie.SolarEdge.ModBus.TCP.Types.UInt64;
 Console.WriteLine("Djohnnie.SolarEdge.ModBus.TCP");
 Console.WriteLine();
 
-using var client = new ModbusClient("xxx.xxx.xxx.xxx", 1502);
+using var client = new ModbusClient("192.168.10.201", 1502);
 
 client.Connect();
 

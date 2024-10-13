@@ -51,6 +51,8 @@ public static class SunspecConsts
 
 
 
+    public static ushort Storage_Control_Mode = 0xE004;
+
     public static ushort Battery_1_Manufacturer_Name = 0xE100;
     public static ushort Battery_1_Model = 0xE110;
     public static ushort Battery_1_Firmware_Version = 0xE120;
@@ -100,7 +102,6 @@ public static class SunspecConsts
     public static ushort Battery_2_Status_Internal = 0xE288;
 
 
-    public static ushort Storage_Control_Mode = 0xE004;
 
 
     public static Dictionary<ushort, SunspecDefinition> SunspecDefinitions = new()
