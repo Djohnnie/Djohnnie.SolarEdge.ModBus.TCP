@@ -2,7 +2,6 @@
 using Djohnnie.SolarEdge.ModBus.TCP.Converters;
 using Djohnnie.SolarEdge.ModBus.TCP.Types;
 using NModbus;
-using NModbus.Extensions.Enron;
 using System.Net.Sockets;
 
 namespace Djohnnie.SolarEdge.ModBus.TCP;

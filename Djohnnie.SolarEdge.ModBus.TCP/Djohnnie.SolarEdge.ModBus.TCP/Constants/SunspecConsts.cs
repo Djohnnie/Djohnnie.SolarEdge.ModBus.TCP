@@ -1,5 +1,4 @@
 ﻿using Djohnnie.SolarEdge.ModBus.TCP.Types;
-using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Djohnnie.SolarEdge.ModBus.TCP.Constants;
 
