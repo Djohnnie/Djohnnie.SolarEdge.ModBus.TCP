@@ -8,6 +8,11 @@ pool:
 
 steps:
 
+- task: DotNetCoreCLI@2
+  inputs:
+    command: 'build'
+    projects: '**/Djohnnie.SolarEdge.ModBus.TCP.csproj'
+
 - task: NuGetCommand@2
   inputs:
     command: 'pack'
