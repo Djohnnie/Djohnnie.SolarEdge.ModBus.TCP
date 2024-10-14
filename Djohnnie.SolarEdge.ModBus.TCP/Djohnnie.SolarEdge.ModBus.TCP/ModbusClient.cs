@@ -8,7 +8,7 @@ namespace Djohnnie.SolarEdge.ModBus.TCP;
 
 public interface IModbusClient : IDisposable
 {
-    public void Connect();
+    public Task Connect();
     public void Disconnect();
 }
 
@@ -16,7 +16,7 @@ public class ModbusClient : IModbusClient
 {
     private const byte UNIT_IDENTIFIER = 1;
 
-    private readonly TcpClient _client;
+    private TcpClient _client;
     private IModbusMaster _master;
     private bool _isConnected;
 
@@ -30,18 +30,18 @@ public class ModbusClient : IModbusClient
         IpAddress = ipAddress;
         Port = port;
         ConnectionTimeout = connectionTimeout;
-
-        _client = new TcpClient(IpAddress, Port)
-        {
-            ReceiveTimeout = ConnectionTimeout,
-            SendTimeout = ConnectionTimeout
-        };
     }
 
-    public void Connect()
+    public async Task Connect()
     {
         if (!_isConnected)
         {
+            _client = new TcpClient()
+            {
+                ReceiveTimeout = ConnectionTimeout,
+                SendTimeout = ConnectionTimeout
+            };
+            await _client.ConnectAsync(IpAddress, Port);
             var factory = new ModbusFactory();
             _master = factory.CreateMaster(_client);
             _isConnected = true;
@@ -52,6 +52,7 @@ public class ModbusClient : IModbusClient
     {
         if (_isConnected)
         {
+            _client.Dispose();
             _master.Dispose();
             _isConnected = false;
         }
@@ -84,11 +85,6 @@ public class ModbusClient : IModbusClient
         if (_isConnected)
         {
             Disconnect();
-        }
-
-        if (_client != null)
-        {
-            _client.Dispose();
         }
     }
 }

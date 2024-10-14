@@ -12,7 +12,7 @@ Console.WriteLine();
 
 using var client = new ModbusClient("192.168.10.201", 1502);
 
-client.Connect();
+await client.Connect();
 
 var result1 = await client.ReadHoldingRegisters<String32>(SunspecConsts.C_Model);
 Console.WriteLine(result1);
