@@ -5,6 +5,7 @@
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
 		<GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+		<PackRelease>true</PackRelease>
 		<Title>Modbus over TCP API for use with SolarEdge solar inverters, meters and home batteries.</Title>
 		<Authors>Johnny Hooyberghs</Authors>
 		<Description>Modbus over TCP API for use with SolarEdge solar inverters, meters and home batteries.</Description>

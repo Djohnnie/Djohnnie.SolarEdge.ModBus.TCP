@@ -17,10 +17,13 @@ public class ModbusClient : IModbusClient
     private const byte UNIT_IDENTIFIER = 1;
 
     private readonly TcpClient _client;
+    private IModbusMaster _master;
+    private bool _isConnected;
 
     public string IpAddress { get; init; }
     public int Port { get; init; }
     public int ConnectionTimeout { get; init; }
+    public bool IsConnected => _isConnected;
 
     public ModbusClient(string ipAddress, int port, int connectionTimeout = 5000)
     {
@@ -37,12 +40,21 @@ public class ModbusClient : IModbusClient
 
     public void Connect()
     {
-        //_client.Connect(new IPEndPoint(IPAddress.Parse(IpAddress), Port), ModbusEndianness.LittleEndian);
+        if (!_isConnected)
+        {
+            var factory = new ModbusFactory();
+            _master = factory.CreateMaster(_client);
+            _isConnected = true;
+        }
     }
 
     public void Disconnect()
     {
-        //_client.Disconnect();
+        if (_isConnected)
+        {
+            _master.Dispose();
+            _isConnected = false;
+        }
     }
 
     public async Task<TResult> ReadHoldingRegisters<TResult>(ushort address) where TResult : ModbusType, new()
@@ -56,9 +68,7 @@ public class ModbusClient : IModbusClient
             Description = sunspecDefinition.Description
         };
 
-        var factory = new ModbusFactory();
-        var master = factory.CreateMaster(_client);
-        var data = await master.ReadHoldingRegistersAsync(UNIT_IDENTIFIER, address, result.Size);
+        var data = await _master.ReadHoldingRegistersAsync(UNIT_IDENTIFIER, address, result.Size);
         result.SetValue(data);
 
         return result;
@@ -66,14 +76,16 @@ public class ModbusClient : IModbusClient
 
     public async Task WriteSingleRegister(ushort address, ushort value)
     {
-        var factory = new ModbusFactory();
-        var master = factory.CreateMaster(_client);
-
-        await master.WriteSingleRegisterAsync(UNIT_IDENTIFIER, address, value);
+        await _master.WriteSingleRegisterAsync(UNIT_IDENTIFIER, address, value);
     }
 
     public void Dispose()
     {
+        if (_isConnected)
+        {
+            Disconnect();
+        }
+
         if (_client != null)
         {
             _client.Dispose();
