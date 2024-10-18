@@ -17,6 +17,9 @@ await client.Connect();
 var result1 = await client.ReadHoldingRegisters<String32>(SunspecConsts.C_Model);
 Console.WriteLine(result1);
 
+client.Disconnect();
+await client.Connect();
+
 var result2 = await client.ReadHoldingRegisters<String16>(SunspecConsts.C_Version);
 Console.WriteLine(result2);
 

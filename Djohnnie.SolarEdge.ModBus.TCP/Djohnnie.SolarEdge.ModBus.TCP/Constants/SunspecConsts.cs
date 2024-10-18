@@ -147,7 +147,7 @@ public static class SunspecConsts
         { I_Temp_SF, new SunspecDefinition { Name = nameof(I_Temp_SF), Address = I_Temp_SF, Size = 1, Type = typeof(Types.Int16), Description = "Heat Sink Temperature scale factor" } },
         { I_Status, new SunspecDefinition { Name = nameof(I_Status), Address = I_Status, Size = 1, Type = typeof(Types.UInt16), Description = "Operating State" } },
         { I_Status_Vendor, new SunspecDefinition { Name = nameof(I_Status_Vendor), Address = I_Status_Vendor, Size = 1, Type = typeof(Types.UInt16), Description = "Vendor-defined operating state and error codes. For error description, meaning and troubleshooting, refer to the SolarEdge Installation Guide" } },
-
+        { Storage_Control_Mode, new SunspecDefinition { Name = nameof(Storage_Control_Mode), Address = Storage_Control_Mode, Size = 1, Type = typeof(Types.UInt16), Description = "Storage Control Mode is used to set the StorEdge system operating mode (0..4)" } },
         { Battery_1_Manufacturer_Name, new SunspecDefinition { Name = nameof(Battery_1_Manufacturer_Name), Address = Battery_1_Manufacturer_Name, Size = 16, Type = typeof(String32), Description = "Battery 1 Manufacturer Name" } },
         { Battery_1_Model, new SunspecDefinition { Name = nameof(Battery_1_Model), Address = Battery_1_Model, Size = 16, Type = typeof(String32), Description = "Battery 1 Model" } },
         { Battery_1_Firmware_Version, new SunspecDefinition { Name = nameof(Battery_1_Firmware_Version), Address = Battery_1_Firmware_Version, Size = 16, Type = typeof(String32), Description = "Battery 1 Firmware Version" } },
