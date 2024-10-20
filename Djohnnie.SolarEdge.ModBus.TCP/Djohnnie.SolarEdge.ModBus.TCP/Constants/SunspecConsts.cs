@@ -47,10 +47,15 @@ public static class SunspecConsts
     public static ushort I_Status = 40107;
     public static ushort I_Status_Vendor = 40108;
 
-
-
-
     public static ushort Storage_Control_Mode = 0xE004;
+    public static ushort Storage_AC_Charge_Policy = 0xE005;
+    public static ushort Storage_AC_Charge_Limit = 0xE006;
+    public static ushort Storage_Backup_Reserved_Setting = 0xE008;
+    public static ushort Storage_Charge_Discharge_Default_Mode = 0xE00A;
+    public static ushort Remote_Control_Command_Timeout = 0xE00B;
+    public static ushort Remote_Control_Command_Mode = 0xE00D;
+    public static ushort Remote_Control_Charge_Limit = 0xE00E;
+    public static ushort Remote_Control_Command_Discharge_Limit = 0xE010;
 
     public static ushort Battery_1_Manufacturer_Name = 0xE100;
     public static ushort Battery_1_Model = 0xE110;
@@ -147,7 +152,17 @@ public static class SunspecConsts
         { I_Temp_SF, new SunspecDefinition { Name = nameof(I_Temp_SF), Address = I_Temp_SF, Size = 1, Type = typeof(Types.Int16), Description = "Heat Sink Temperature scale factor" } },
         { I_Status, new SunspecDefinition { Name = nameof(I_Status), Address = I_Status, Size = 1, Type = typeof(Types.UInt16), Description = "Operating State" } },
         { I_Status_Vendor, new SunspecDefinition { Name = nameof(I_Status_Vendor), Address = I_Status_Vendor, Size = 1, Type = typeof(Types.UInt16), Description = "Vendor-defined operating state and error codes. For error description, meaning and troubleshooting, refer to the SolarEdge Installation Guide" } },
+
         { Storage_Control_Mode, new SunspecDefinition { Name = nameof(Storage_Control_Mode), Address = Storage_Control_Mode, Size = 1, Type = typeof(Types.UInt16), Description = "Storage Control Mode is used to set the StorEdge system operating mode (0..4)" } },
+        { Storage_AC_Charge_Policy, new SunspecDefinition { Name = nameof(Storage_AC_Charge_Policy), Address = Storage_AC_Charge_Policy, Size = 1, Type = typeof(Types.UInt16), Description = "Storage AC Charge Policy is used to enable charging for AC and the limit of yearly AC charge (if applicable) (0..3)" } },
+        { Storage_AC_Charge_Limit, new SunspecDefinition { Name = nameof(Storage_AC_Charge_Limit), Address = Storage_AC_Charge_Limit, Size = 2, Type = typeof(Types.Float32), Description = "Storage AC Charge Limit is used to set the AC charge limit according to the policy set in the previous register. Either fixed in kWh or percentage is set (e.g. 100KWh or 70%). Relevant only for Storage AC Charge Policy = 2 or 3." } },
+        { Storage_Backup_Reserved_Setting, new SunspecDefinition { Name = nameof(Storage_Backup_Reserved_Setting), Address = Storage_Backup_Reserved_Setting, Size = 2, Type = typeof(Types.Float32), Description = "Storage Backup Reserved Setting sets the percentage of reserved battery SOE to be used for backup purposes. Relevant only for inverters with backup functionality." } },
+        { Storage_Charge_Discharge_Default_Mode, new SunspecDefinition { Name = nameof(Storage_Charge_Discharge_Default_Mode), Address = Storage_Charge_Discharge_Default_Mode, Size = 1, Type = typeof(Types.UInt16), Description = "Storage Charge/Discharge default Mode sets the default mode of operation when Remote Control Command Timeout has expired. (0..7)" } },
+        { Remote_Control_Command_Timeout, new SunspecDefinition { Name = nameof(Remote_Control_Command_Timeout), Address = Remote_Control_Command_Timeout, Size = 2, Type = typeof(Types.UInt32), Description = "Remote Control Command Timeout sets the operating timeframe for the charge/discharge command sets in Remote Control Command Mode register. When expired, it reverts to the default mode defined in Storage Charge/Discharge default Mode register." } },
+        { Remote_Control_Command_Mode, new SunspecDefinition { Name = nameof(Remote_Control_Command_Mode), Address = Remote_Control_Command_Mode, Size = 1, Type = typeof(Types.UInt16), Description = "Remote Control Command Mode sets the operating mode during the defined time frame according to the selected Storage Charge/Discharge Mode (see Storage Charge/Discharge default Mode above for the different modes)" } },
+        { Remote_Control_Charge_Limit, new SunspecDefinition { Name = nameof(Remote_Control_Charge_Limit), Address = Remote_Control_Charge_Limit, Size = 2, Type = typeof(Types.Float32), Description = "Remote Control Charge Limit sets the maximum charge limit. The default is the maximum battery charge power." } },
+        { Remote_Control_Command_Discharge_Limit, new SunspecDefinition { Name = nameof(Remote_Control_Command_Discharge_Limit), Address = Remote_Control_Command_Discharge_Limit, Size = 2, Type = typeof(Types.Float32), Description = "Remote Control Charge Limit sets the maximum discharge limit. The default is the maximum battery discharge power." } },
+
         { Battery_1_Manufacturer_Name, new SunspecDefinition { Name = nameof(Battery_1_Manufacturer_Name), Address = Battery_1_Manufacturer_Name, Size = 16, Type = typeof(String32), Description = "Battery 1 Manufacturer Name" } },
         { Battery_1_Model, new SunspecDefinition { Name = nameof(Battery_1_Model), Address = Battery_1_Model, Size = 16, Type = typeof(String32), Description = "Battery 1 Model" } },
         { Battery_1_Firmware_Version, new SunspecDefinition { Name = nameof(Battery_1_Firmware_Version), Address = Battery_1_Firmware_Version, Size = 16, Type = typeof(String32), Description = "Battery 1 Firmware Version" } },

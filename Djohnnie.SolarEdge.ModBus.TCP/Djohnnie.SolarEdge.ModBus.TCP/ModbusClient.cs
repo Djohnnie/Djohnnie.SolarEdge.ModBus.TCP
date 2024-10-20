@@ -80,6 +80,20 @@ public class ModbusClient : IModbusClient
         await _master.WriteSingleRegisterAsync(UNIT_IDENTIFIER, address, value);
     }
 
+    public async Task WriteSingleRegister(ushort address, uint value)
+    {
+        var bytes = BitConverter.GetBytes(value);
+        var data = new ushort[2] { BitConverter.ToUInt16(bytes, 0), BitConverter.ToUInt16(bytes, 2) };
+        await _master.WriteMultipleRegistersAsync(UNIT_IDENTIFIER, address, data);
+    }
+
+    public async Task WriteSingleRegister(ushort address, float value)
+    {
+        var bytes = BitConverter.GetBytes(value);
+        var data = new ushort[2] { BitConverter.ToUInt16(bytes, 0), BitConverter.ToUInt16(bytes, 2) };
+        await _master.WriteMultipleRegistersAsync(UNIT_IDENTIFIER, address, data);
+    }
+
     public void Dispose()
     {
         if (_isConnected)
