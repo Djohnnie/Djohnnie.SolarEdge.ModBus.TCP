@@ -28,6 +28,12 @@ internal static class NumericConverter
         result.SetValue(value);
     }
 
+    internal static void SetValue(this Types.Int32 result, Span<ushort> data)
+    {
+        Span<int> intData = MemoryMarshal.Cast<ushort, int>(data);
+        result.SetValue(intData[0]);
+    }
+
     internal static void SetValue(this Types.UInt64 result, Span<ushort> data)
     {
         Span<ulong> ulongData = MemoryMarshal.Cast<ushort, ulong>(data);

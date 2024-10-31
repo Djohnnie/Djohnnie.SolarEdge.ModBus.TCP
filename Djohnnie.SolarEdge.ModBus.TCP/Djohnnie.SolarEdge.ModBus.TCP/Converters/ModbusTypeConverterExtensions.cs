@@ -17,6 +17,9 @@ internal static class ModbusTypeConverterExtensions
             case Types.UInt32 uint32:
                 uint32.SetValue(data.AsSpan());
                 break;
+            case Types.Int32 int32:
+                int32.SetValue(data.AsSpan());
+                break;
             case Types.UInt64 uint64:
                 uint64.SetValue(data.AsSpan());
                 break;
