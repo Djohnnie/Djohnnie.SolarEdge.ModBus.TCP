@@ -47,6 +47,11 @@ public static class SunspecConsts
     public static ushort I_Status = 40107;
     public static ushort I_Status_Vendor = 40108;
 
+    public static ushort ExportControlMode = 0xE000;
+    public static ushort ExportControlLimitMode = 0xE001;
+    public static ushort ExportControlSiteLimit = 0xE002;
+    public static ushort ExternalProductionMaxPower = 0xE012;
+
     public static ushort AdvancedPwrControlEn = 0xF142;
     public static ushort ReactivePwrConfig = 0xF104;
 
@@ -155,6 +160,11 @@ public static class SunspecConsts
         { I_Temp_SF, new SunspecDefinition { Name = nameof(I_Temp_SF), Address = I_Temp_SF, Size = 1, Type = typeof(Types.Int16), Description = "Heat Sink Temperature scale factor" } },
         { I_Status, new SunspecDefinition { Name = nameof(I_Status), Address = I_Status, Size = 1, Type = typeof(Types.UInt16), Description = "Operating State" } },
         { I_Status_Vendor, new SunspecDefinition { Name = nameof(I_Status_Vendor), Address = I_Status_Vendor, Size = 1, Type = typeof(Types.UInt16), Description = "Vendor-defined operating state and error codes. For error description, meaning and troubleshooting, refer to the SolarEdge Installation Guide" } },
+
+        { ExportControlMode, new SunspecDefinition { Name = nameof(ExportControlMode), Address = ExportControlMode, Size = 1, Type = typeof(Types.UInt16), Description = "(0..11)" } },
+        { ExportControlLimitMode, new SunspecDefinition { Name = nameof(ExportControlLimitMode), Address = ExportControlLimitMode, Size = 1, Type = typeof(Types.UInt16), Description = "(0..1)" } },
+        { ExportControlSiteLimit, new SunspecDefinition { Name = nameof(ExportControlSiteLimit), Address = ExportControlSiteLimit, Size = 2, Type = typeof(Types.Float32), Description = "The site limit power in watts" } },
+        { ExternalProductionMaxPower, new SunspecDefinition { Name = nameof(ExternalProductionMaxPower), Address = ExternalProductionMaxPower, Size = 2, Type = typeof(Types.Float32), Description = "The maximum power in watts of the external non-SolarEdge production for correct fallback calculation" } },
 
         { AdvancedPwrControlEn, new SunspecDefinition { Name = nameof(AdvancedPwrControlEn), Address = AdvancedPwrControlEn, Size = 2, Type = typeof(Types.UInt32), Description = "(0..1)" } },
         { ReactivePwrConfig, new SunspecDefinition { Name = nameof(ReactivePwrConfig), Address = ReactivePwrConfig, Size = 2, Type = typeof(Types.UInt32), Description = "(0..4)" } },

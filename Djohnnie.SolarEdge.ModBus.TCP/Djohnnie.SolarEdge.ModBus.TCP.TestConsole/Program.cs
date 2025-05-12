@@ -2,7 +2,6 @@
 using Djohnnie.SolarEdge.ModBus.TCP.Constants;
 using Djohnnie.SolarEdge.ModBus.TCP.Types;
 using Int16 = Djohnnie.SolarEdge.ModBus.TCP.Types.Int16;
-using Int32 = Djohnnie.SolarEdge.ModBus.TCP.Types.Int32;
 using UInt16 = Djohnnie.SolarEdge.ModBus.TCP.Types.UInt16;
 using UInt32 = Djohnnie.SolarEdge.ModBus.TCP.Types.UInt32;
 using UInt64 = Djohnnie.SolarEdge.ModBus.TCP.Types.UInt64;
@@ -11,7 +10,7 @@ using UInt64 = Djohnnie.SolarEdge.ModBus.TCP.Types.UInt64;
 Console.WriteLine("Djohnnie.SolarEdge.ModBus.TCP");
 Console.WriteLine();
 
-using var client = new ModbusClient("x.x.x.x", 1);
+using var client = new ModbusClient("192.168.10.201", 1502);
 
 await client.Connect();
 
@@ -25,44 +24,71 @@ await client.Connect();
 //Remote_Control_Charge_Limit: 5000 (16384, 17820)
 //Remote_Control_Command_Discharge_Limit: 5000
 
-//await client.WriteSingleRegister(SunspecConsts.Storage_Control_Mode, (ushort)1);
+await client.WriteSingleRegister(SunspecConsts.ExportControlMode, 0);
+await client.WriteSingleRegister(SunspecConsts.ExportControlSiteLimit, 0f);
 
-var resultA = await client.ReadHoldingRegisters<Int32>(SunspecConsts.AdvancedPwrControlEn);
-Console.WriteLine($"AdvancedPwrControlEn: {resultA}");
+var resultA = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlMode);
+Console.WriteLine($"ExportControlMode: {resultA}");
 
-var resultB = await client.ReadHoldingRegisters<Int32>(SunspecConsts.ReactivePwrConfig);
-Console.WriteLine($"ReactivePwrConfig: {resultB}");
+var resultB = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlLimitMode);
+Console.WriteLine($"ExportControlLimitMode: {resultB}");
 
-var result1 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_Control_Mode);
-Console.WriteLine($"Storage_Control_Mode: {result1}");
+var resultC = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExportControlSiteLimit);
+Console.WriteLine($"ExportControlSiteLimit: {resultC}");
 
-var result2 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_AC_Charge_Policy);
-Console.WriteLine($"Storage_AC_Charge_Policy: {result2}");
+var resultD = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExternalProductionMaxPower);
+Console.WriteLine($"ExternalProductionMaxPower: {resultD}");
 
-var result3 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Storage_AC_Charge_Limit);
-Console.WriteLine($"Storage_AC_Charge_Limit: {result3}");
+//var result = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Max_Energy);
+//Console.WriteLine($"Battery_1_Max_Energy: {result}");
 
-var result4 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Storage_Backup_Reserved_Setting);
-Console.WriteLine($"Storage_Backup_Reserved_Setting: {result4}");
+//var resultE = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Rated_Energy);
+//Console.WriteLine($"Battery_1_Rated_Energy: {resultE}");
 
-var result5 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_Charge_Discharge_Default_Mode);
-Console.WriteLine($"Storage_Charge_Discharge_Default_Mode: {result5}");
+//var resultF = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Available_Energy);
+//Console.WriteLine($"Battery_1_Lifetime_Export_Energy_Counter: {resultF}");
 
-//await client.WriteSingleRegister(SunspecConsts.Remote_Control_Command_Timeout, (uint)7200);
-var result6 = await client.ReadHoldingRegisters<UInt32>(SunspecConsts.Remote_Control_Command_Timeout);
-Console.WriteLine($"Remote_Control_Command_Timeout: {result6}");
+var resultG = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_State_of_Health);
+Console.WriteLine($"Battery_1_State_of_Health: {resultG}");
 
-await client.WriteSingleRegister(SunspecConsts.Remote_Control_Command_Mode, (ushort)3);
-var result7 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Remote_Control_Command_Mode);
-Console.WriteLine($"Remote_Control_Command_Mode: {result7}");
+//var resultA = await client.ReadHoldingRegisters<UInt32>(SunspecConsts.AdvancedPwrControlEn);
+//Console.WriteLine($"AdvancedPwrControlEn: {resultA}");
 
-//await client.WriteSingleRegister(SunspecConsts.Remote_Control_Charge_Limit, 1500f);
-var result8 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Remote_Control_Charge_Limit);
-Console.WriteLine($"Remote_Control_Charge_Limit: {result8}");
+//var resultB = await client.ReadHoldingRegisters<UInt32>(SunspecConsts.ReactivePwrConfig);
+//Console.WriteLine($"ReactivePwrConfig: {resultB}");
+
+////await client.WriteSingleRegister(SunspecConsts.Storage_Control_Mode, (ushort)4);
+
+//var result1 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_Control_Mode);
+//Console.WriteLine($"Storage_Control_Mode: {result1}");
+
+//var result2 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_AC_Charge_Policy);
+//Console.WriteLine($"Storage_AC_Charge_Policy: {result2}");
+
+//var result3 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Storage_AC_Charge_Limit);
+//Console.WriteLine($"Storage_AC_Charge_Limit: {result3}");
+
+//var result4 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Storage_Backup_Reserved_Setting);
+//Console.WriteLine($"Storage_Backup_Reserved_Setting: {result4}");
+
+//var result5 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Storage_Charge_Discharge_Default_Mode);
+//Console.WriteLine($"Storage_Charge_Discharge_Default_Mode: {result5}");
+
+////await client.WriteSingleRegister(SunspecConsts.Remote_Control_Command_Timeout, (uint)30);
+//var result6 = await client.ReadHoldingRegisters<UInt32>(SunspecConsts.Remote_Control_Command_Timeout);
+//Console.WriteLine($"Remote_Control_Command_Timeout: {result6}");
+
+////await client.WriteSingleRegister(SunspecConsts.Remote_Control_Command_Mode, (ushort)3);
+//var result7 = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.Remote_Control_Command_Mode);
+//Console.WriteLine($"Remote_Control_Command_Mode: {result7}");
+
+////await client.WriteSingleRegister(SunspecConsts.Remote_Control_Charge_Limit, 1500f);
+//var result8 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Remote_Control_Charge_Limit);
+//Console.WriteLine($"Remote_Control_Charge_Limit: {result8}");
 
 
-var result9 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Remote_Control_Command_Discharge_Limit);
-Console.WriteLine($"Remote_Control_Command_Discharge_Limit: {result9}");
+//var result9 = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Remote_Control_Command_Discharge_Limit);
+//Console.WriteLine($"Remote_Control_Command_Discharge_Limit: {result9}");
 
 
 //while (true)
