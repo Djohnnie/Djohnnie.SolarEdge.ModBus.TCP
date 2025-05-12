@@ -24,8 +24,8 @@ await client.Connect();
 //Remote_Control_Charge_Limit: 5000 (16384, 17820)
 //Remote_Control_Command_Discharge_Limit: 5000
 
-await client.WriteSingleRegister(SunspecConsts.ExportControlMode, 0);
-await client.WriteSingleRegister(SunspecConsts.ExportControlSiteLimit, 0f);
+//await client.WriteSingleRegister(SunspecConsts.ExportControlMode, 0);
+//await client.WriteSingleRegister(SunspecConsts.ExportControlSiteLimit, 0f);
 
 var resultA = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlMode);
 Console.WriteLine($"ExportControlMode: {resultA}");
