@@ -47,6 +47,9 @@ public static class SunspecConsts
     public static ushort I_Status = 40107;
     public static ushort I_Status_Vendor = 40108;
 
+    public static ushort M1_AC_Power = 40206;
+    public static ushort M1_AC_Power_SF = 40210;
+
     public static ushort ExportControlMode = 0xE000;
     public static ushort ExportControlLimitMode = 0xE001;
     public static ushort ExportControlSiteLimit = 0xE002;
@@ -160,6 +163,9 @@ public static class SunspecConsts
         { I_Temp_SF, new SunspecDefinition { Name = nameof(I_Temp_SF), Address = I_Temp_SF, Size = 1, Type = typeof(Types.Int16), Description = "Heat Sink Temperature scale factor" } },
         { I_Status, new SunspecDefinition { Name = nameof(I_Status), Address = I_Status, Size = 1, Type = typeof(Types.UInt16), Description = "Operating State" } },
         { I_Status_Vendor, new SunspecDefinition { Name = nameof(I_Status_Vendor), Address = I_Status_Vendor, Size = 1, Type = typeof(Types.UInt16), Description = "Vendor-defined operating state and error codes. For error description, meaning and troubleshooting, refer to the SolarEdge Installation Guide" } },
+
+        { M1_AC_Power, new SunspecDefinition { Name = nameof(M1_AC_Power), Address = M1_AC_Power, Size = 1, Type = typeof(Types.Int16), Description = "Total Real Power (sum of active phases)" } },
+        { M1_AC_Power_SF, new SunspecDefinition { Name = nameof(M1_AC_Power_SF), Address = M1_AC_Power_SF, Size = 1, Type = typeof(Types.Int16), Description = "AC Real Power Scale Factor" } },
 
         { ExportControlMode, new SunspecDefinition { Name = nameof(ExportControlMode), Address = ExportControlMode, Size = 1, Type = typeof(Types.UInt16), Description = "(0..11)" } },
         { ExportControlLimitMode, new SunspecDefinition { Name = nameof(ExportControlLimitMode), Address = ExportControlLimitMode, Size = 1, Type = typeof(Types.UInt16), Description = "(0..1)" } },

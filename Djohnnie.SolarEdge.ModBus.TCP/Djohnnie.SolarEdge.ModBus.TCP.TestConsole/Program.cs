@@ -27,17 +27,42 @@ await client.Connect();
 //await client.WriteSingleRegister(SunspecConsts.ExportControlMode, 0);
 //await client.WriteSingleRegister(SunspecConsts.ExportControlSiteLimit, 0f);
 
-var resultA = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlMode);
-Console.WriteLine($"ExportControlMode: {resultA}");
+while (true)
+{
+    var resultA = await client.ReadHoldingRegisters<Int16>(SunspecConsts.I_AC_Power);
+    var resultB = await client.ReadHoldingRegisters<Int16>(SunspecConsts.I_AC_Power_SF);
+    var resultC = await client.ReadHoldingRegisters<Int16>(SunspecConsts.I_DC_Power);
+    var resultD = await client.ReadHoldingRegisters<Int16>(SunspecConsts.I_DC_Power_SF);
+    var resultE = await client.ReadHoldingRegisters<Int16>(SunspecConsts.M1_AC_Power);
+    var resultF = await client.ReadHoldingRegisters<Int16>(SunspecConsts.M1_AC_Power_SF);
+    var resultG = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Instantaneous_Power);
+    var resultX = await client.ReadHoldingRegisters<Acc32>(SunspecConsts.I_AC_Energy_WH);
+    var resultY = await client.ReadHoldingRegisters<Int16>(SunspecConsts.I_AC_Energy_WH_SF);
+    Console.Clear();
+    var homePower = Math.Round(resultA.Value * Math.Pow(10, (double)resultB.Value));
+    Console.WriteLine($"I_AC_Power: {homePower}");
+    Console.WriteLine($"I_DC_Power: {resultC.Value * Math.Pow(10, (double)resultD.Value)}");
+    var exportPower = Math.Round(resultE.Value * Math.Pow(10, (double)resultF.Value));
+    Console.WriteLine($"M1_AC_Power: {exportPower}");
+    var batteryPower = Math.Round(resultG.Value);
+    Console.WriteLine($"Battery_1_Instantaneous_Power: {batteryPower}");
+    Console.WriteLine($"Berekend vermogen van de zon: {homePower + batteryPower - exportPower}");
+    Console.WriteLine();
+    Console.WriteLine($"{Math.Round(resultX.Value * Math.Pow(10, (double)resultY.Value)) / 1_000_000f}");
 
-var resultB = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlLimitMode);
-Console.WriteLine($"ExportControlLimitMode: {resultB}");
+    await Task.Delay(1000);
+}
+//var resultA = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlMode);
+//Console.WriteLine($"ExportControlMode: {resultA}");
 
-var resultC = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExportControlSiteLimit);
-Console.WriteLine($"ExportControlSiteLimit: {resultC}");
+//var resultB = await client.ReadHoldingRegisters<UInt16>(SunspecConsts.ExportControlLimitMode);
+//Console.WriteLine($"ExportControlLimitMode: {resultB}");
 
-var resultD = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExternalProductionMaxPower);
-Console.WriteLine($"ExternalProductionMaxPower: {resultD}");
+//var resultC = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExportControlSiteLimit);
+//Console.WriteLine($"ExportControlSiteLimit: {resultC}");
+
+//var resultD = await client.ReadHoldingRegisters<Float32>(SunspecConsts.ExternalProductionMaxPower);
+//Console.WriteLine($"ExternalProductionMaxPower: {resultD}");
 
 //var result = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Max_Energy);
 //Console.WriteLine($"Battery_1_Max_Energy: {result}");
@@ -48,8 +73,8 @@ Console.WriteLine($"ExternalProductionMaxPower: {resultD}");
 //var resultF = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_Available_Energy);
 //Console.WriteLine($"Battery_1_Lifetime_Export_Energy_Counter: {resultF}");
 
-var resultG = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_State_of_Health);
-Console.WriteLine($"Battery_1_State_of_Health: {resultG}");
+//var resultG = await client.ReadHoldingRegisters<Float32>(SunspecConsts.Battery_1_State_of_Health);
+//Console.WriteLine($"Battery_1_State_of_Health: {resultG}");
 
 //var resultA = await client.ReadHoldingRegisters<UInt32>(SunspecConsts.AdvancedPwrControlEn);
 //Console.WriteLine($"AdvancedPwrControlEn: {resultA}");
