@@ -1,7 +1,7 @@
 trigger:
 - main
 
-name: 0.1.0.$(Rev:r)
+name: 0.2.0.$(Rev:r)
 
 pool:
   vmImage: ubuntu-22.04
