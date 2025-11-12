@@ -4,7 +4,7 @@ trigger:
 name: 0.2.0.$(Rev:r)
 
 pool:
-  vmImage: ubuntu-latest
+  vmImage: ubuntu-22.04
 
 steps:
 
