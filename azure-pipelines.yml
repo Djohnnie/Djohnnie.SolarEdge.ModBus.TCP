@@ -4,10 +4,18 @@ trigger:
 name: 0.2.0.$(Rev:r)
 
 pool:
-  vmImage: ubuntu-22.04
+  vmImage: ubuntu-latest
 
 steps:
 
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK (10.0)'
+  inputs:
+    packageType: sdk
+    version: 10.0.100
+    includePreviewVersions: true
+    installationPath: $(Agent.ToolsDirectory)/dotnet
+    
 - task: DotNetCoreCLI@2
   inputs:
     command: 'build'
